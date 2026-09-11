@@ -568,16 +568,18 @@
   });
 
   const backTop = $('#backTop');
+  const syncBackTop = () => backTop.classList.toggle('is-visible', scrollY > 400);
   addEventListener('scroll', () => {
     const y = scrollY;
     $('#topbar').classList.toggle('is-scrolled', y > 8);
     $('#topbar').classList.toggle('search-visible', y > 320);
-    backTop.classList.toggle('is-visible', y > 600);
+    syncBackTop();
   }, { passive: true });
   backTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
   /* ---------------- boot ---------------- */
   applyTheme();
+  syncBackTop();
   $('#topbar').classList.toggle('search-visible', scrollY > 320);
   load()
     .then(() => {
