@@ -20,6 +20,7 @@
       viewZhSource: '查看中文 Markdown',
       title: 'Free for Dev · 开发者免费服务清单（中文）',
       themeLabel: '切换深色模式',
+      views: { masonry: '瀑布流', table: '紧凑表格', list: '文档清单' },
     },
     en: {
       brandSub: 'Free services for developers',
@@ -38,7 +39,18 @@
       viewZhSource: 'Chinese Markdown',
       title: 'Free for Dev · Free services for developers',
       themeLabel: 'Toggle dark mode',
+      views: { masonry: 'Masonry', table: 'Table', list: 'List' },
     },
+  };
+
+  const VIEWS = ['masonry', 'table', 'list'];
+  const VIEW_ICONS = {
+    masonry:
+      '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="3" width="7" height="11" rx="1.5"/><rect x="3.5" y="17" width="7" height="4" rx="1.5"/><rect x="13.5" y="3" width="7" height="5" rx="1.5"/><rect x="13.5" y="11" width="7" height="10" rx="1.5"/></svg>',
+    table:
+      '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9 4v16"/></svg>',
+    list:
+      '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>',
   };
 
   const AVATAR_PALETTES = [
@@ -55,10 +67,12 @@
     index: null,
     modules: new Map(),
     flat: [],
+    view: localStorage.getItem('view') || 'masonry',
   };
 
   const $ = (sel) => document.querySelector(sel);
   const t = (key) => I18N[state.lang][key];
+  if (!VIEWS.includes(state.view)) state.view = 'masonry';
 
   /* ---------------- tiny md renderer ---------------- */
   function esc(s) {
@@ -86,8 +100,9 @@
   }
 
   function monogram(name) {
-    const words = name.replace(/[^\p{L}\p{N} .&+-]/gu, '').trim().split(/[\s.]+/).filter(Boolean);
-    if (/[\u4e00-\u9fff]/.test(name)) return name.slice(0, 1);
+    const base = name.match(/^\s*\[([^\]]+)\]/)?.[1] ?? name;
+    const words = base.replace(/[^\p{L}\p{N} .&+-]/gu, '').trim().split(/[\s.]+/).filter(Boolean);
+    if (/[\u4e00-\u9fff]/.test(base)) return base.slice(0, 1);
     return words.slice(0, 2).map((w) => w[0]?.toUpperCase() ?? '').join('');
   }
   function avatarStyle(name) {
@@ -102,13 +117,13 @@
   /* ---------------- data loading ---------------- */
   async function load() {
     const [index, intro] = await Promise.all([
-      fetch('data/index.json').then((r) => r.json()),
-      fetch('data/intro.json').then((r) => r.json()),
+      fetch('data/index.json', { cache: 'no-store' }).then((r) => r.json()),
+      fetch('data/intro.json', { cache: 'no-store' }).then((r) => r.json()),
     ]);
     state.index = index;
     state.intro = intro;
     const mods = await Promise.all(
-      index.sections.map((s) => fetch(`data/modules/${s.id}.json`).then((r) => r.json())),
+      index.sections.map((s) => fetch(`data/modules/${s.id}.json`, { cache: 'no-store' }).then((r) => r.json())),
     );
     mods.forEach((m) => state.modules.set(m.id, m));
 
@@ -169,24 +184,34 @@
       <div>${mdInline(text)}</div>`;
   }
 
-  function nameHtml(name, url) {
-    const inner = esc(name) + EXT_SVG;
+  const MD_LINK_RE = /\[[^\]]*\]\([^)\s]*\)/;
+
+  function renderName(name) {
+    return MD_LINK_RE.test(name) || /[*`]/.test(name) ? mdInline(name) : esc(name);
+  }
+
+  function nameWrapHtml(name, url, cls) {
+    if (MD_LINK_RE.test(name)) return `<span class="${cls}">${mdInline(name)}</span>`;
+    const inner = renderName(name) + (url ? EXT_SVG : '');
     return url
-      ? `<a class="card-name" href="${url}" target="_blank" rel="noopener">${inner}</a>`
-      : `<span class="card-name">${esc(name)}</span>`;
+      ? `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${inner}</a>`
+      : `<span class="${cls}">${inner}</span>`;
+  }
+
+  function nameHtml(name, url) {
+    return nameWrapHtml(name, url, 'card-name');
   }
 
   function descHtml(desc, extraClass = '') {
     if (!desc) return '';
     const picked = pickLang(desc.zh, desc.en);
+    if (!picked.text) return '';
     const tag = state.lang === 'zh' && picked.missing ? '<span class="tag-en">EN</span>' : '';
     return `<p class="${extraClass}">${tag}${mdInline(picked.text)}</p>`;
   }
 
   function offerRowHtml(o) {
-    const name = o.url
-      ? `<a class="offer-name" href="${o.url}" target="_blank" rel="noopener">${esc(o.name)}${EXT_SVG}</a>`
-      : `<span class="offer-name">${esc(o.name)}</span>`;
+    const name = nameWrapHtml(o.name, o.url, 'offer-name');
     const subs = (o.subs ?? [])
       .map((s) => {
         const p = pickLang(s.text.zh, s.text.en);
@@ -215,7 +240,114 @@
       <div class="card-head">
         <span class="avatar" style="${avatarStyle(card.name)}" aria-hidden="true">${esc(monogram(pickedName))}</span>
         <div class="card-title">${nameHtml(pickedName, card.url)}${host ? `<span class="card-host">${esc(host)}</span>` : ''}${crumbHtml}</div>
-      </div>${body}</article>`;
+      </div><div class="card-body">${body}</div></article>`;
+  }
+
+  /* ---------------- alternative layouts ---------------- */
+  function descInlineHtml(desc) {
+    if (!desc) return '';
+    const picked = pickLang(desc.zh, desc.en);
+    if (!picked.text) return '';
+    const tag = state.lang === 'zh' && picked.missing ? '<span class="tag-en">EN</span>' : '';
+    return `${tag}${mdInline(picked.text)}`;
+  }
+
+  function subsInlineHtml(subs) {
+    if (!subs || !subs.length) return '';
+    return `<ul class="sub-list">${subs
+      .map((s) => {
+        const p = pickLang(s.text.zh, s.text.en);
+        const tag = state.lang === 'zh' && p.missing ? '<span class="tag-en">EN</span>' : '';
+        return `<li>${tag}${mdInline(p.text)}</li>`;
+      })
+      .join('')}</ul>`;
+  }
+
+  function tAvatarHtml(name, picked) {
+    return `<span class="avatar t-avatar" style="${avatarStyle(name)}" aria-hidden="true">${esc(monogram(picked))}</span>`;
+  }
+
+  function tableHtml(items) {
+    const rows = [];
+    for (const card of items) {
+      const pickedName = state.lang === 'zh' && card.nameZh ? card.nameZh : card.name;
+      const children = card.children ?? [];
+      if (children.length) {
+        const host = card.url ? `<span class="t-host">${esc(hostOf(card.url))}</span>` : '';
+        const desc = card.desc && (card.desc.zh || card.desc.en)
+          ? `<div class="t-desc">${descInlineHtml(card.desc)}</div>` : '';
+        rows.push(
+          `<tr class="is-parent"><td colspan="2"><div class="t-headline">${tAvatarHtml(card.name, pickedName)}<span class="t-namewrap">${nameWrapHtml(pickedName, card.url, 't-link is-parent-name')}${host}</span></div>${desc}</td></tr>`,
+        );
+        for (const o of children) {
+          const oName = state.lang === 'zh' && o.nameZh ? o.nameZh : o.name;
+          rows.push(
+            `<tr><td class="t-name t-child">${nameWrapHtml(oName, o.url, 't-link')}</td><td class="t-desc">${descInlineHtml(o.desc)}${subsInlineHtml(o.subs)}</td></tr>`,
+          );
+        }
+      } else {
+        const host = card.url ? `<span class="t-host">${esc(hostOf(card.url))}</span>` : '';
+        rows.push(
+          `<tr><td class="t-name"><div class="t-cell">${tAvatarHtml(card.name, pickedName)}<span class="t-namewrap">${nameWrapHtml(pickedName, card.url, 't-link')}${host}</span></div></td><td class="t-desc">${descInlineHtml(card.desc)}${subsInlineHtml(card.subs)}</td></tr>`,
+        );
+      }
+    }
+    return `<div class="table-wrap"><table class="svc-table"><tbody>${rows.join('')}</tbody></table></div>`;
+  }
+
+  function tableHitRow(item) {
+    const crumb = item.offer ? `${titleOf(item.section)} / ${item.card.name}` : titleOf(item.section);
+    const c = item.offer ?? item.card;
+    const pickedName = state.lang === 'zh' && c.nameZh ? c.nameZh : c.name;
+    const host = !item.offer && c.url ? `<span class="t-host">${esc(hostOf(c.url))}</span>` : '';
+    return `<tr><td class="t-name"><div class="t-cell">${tAvatarHtml(c.name, pickedName)}<span class="t-namewrap">${nameWrapHtml(pickedName, c.url, 't-link')}${host}</span><span class="result-crumb">${esc(crumb)}</span></div></td><td class="t-desc">${descInlineHtml(c.desc)}${subsInlineHtml(c.subs)}</td></tr>`;
+  }
+
+  function listHitHtml(item) {
+    const crumb = item.offer ? `${titleOf(item.section)} / ${item.card.name}` : titleOf(item.section);
+    const c = item.offer ?? item.card;
+    const pickedName = state.lang === 'zh' && c.nameZh ? c.nameZh : c.name;
+    const host = c.url ? hostOf(c.url) : '';
+    const body = (c.children ?? []).length
+      ? `<ul class="offer-list">${c.children.map(offerRowHtml).join('')}</ul>`
+      : subsInlineHtml(c.subs);
+    return `<div class="doc-item">
+      <div class="doc-head">
+        <span class="avatar" style="${avatarStyle(c.name)}" aria-hidden="true">${esc(monogram(pickedName))}</span>
+        <div class="doc-title">${nameHtml(pickedName, c.url)}${host ? `<span class="card-host">${esc(host)}</span>` : ''}<span class="result-crumb">${esc(crumb)}</span></div>
+      </div>
+      <div class="doc-body">${descHtml(c.desc, 'card-desc')}${body}</div>
+    </div>`;
+  }
+
+  function listRowHtml(card) {
+    const pickedName = state.lang === 'zh' && card.nameZh ? card.nameZh : card.name;
+    const host = card.url ? hostOf(card.url) : '';
+    const children = card.children ?? [];
+    const ownDesc = descHtml(card.desc, 'card-desc');
+    const offers = children.length
+      ? `<ul class="offer-list">${children.map(offerRowHtml).join('')}</ul>`
+      : subsInlineHtml(card.subs);
+    return `<div class="doc-item reveal">
+      <div class="doc-head">
+        <span class="avatar" style="${avatarStyle(card.name)}" aria-hidden="true">${esc(monogram(pickedName))}</span>
+        <div class="doc-title">${nameHtml(pickedName, card.url)}${host ? `<span class="card-host">${esc(host)}</span>` : ''}</div>
+      </div>
+      <div class="doc-body">${ownDesc}${offers}</div>
+    </div>`;
+  }
+
+  function sectionBodyHtml(m) {
+    if (state.view === 'table') return tableHtml(m.items);
+    if (state.view === 'list') return `<div class="doc-list">${m.items.map(listRowHtml).join('')}</div>`;
+    return `<div class="card-grid">${m.items.map((c) => cardHtml(c)).join('')}</div>`;
+  }
+
+  function renderViewBar() {
+    $('#viewBar').innerHTML = VIEWS.map(
+      (v) =>
+        `<button type="button" class="view-btn ${state.view === v ? 'is-active' : ''}" data-view="${v}" aria-pressed="${state.view === v}">${VIEW_ICONS[v]}<span>${t('views')[v]}</span></button>`,
+    ).join('');
   }
 
   function renderSections() {
@@ -223,7 +355,6 @@
     $('#sections').innerHTML = state.index.sections
       .map((s) => {
         const m = state.modules.get(s.id);
-        const cards = m.items.map((c) => cardHtml(c)).join('');
         const eyebrow = bilingual ? `<span class="section-en">${esc(s.title.en)}</span>` : '';
         const heading = bilingual ? s.title.zh : s.title.en;
         return `<section class="section reveal" id="sec-${s.id}">
@@ -232,7 +363,7 @@
             <h2>${esc(heading)}</h2>
             <span class="section-count">${s.count}</span>
           </header>
-          <div class="card-grid">${cards}</div>
+          ${sectionBodyHtml(m)}
         </section>`;
       })
       .join('');
@@ -263,6 +394,7 @@
     renderStats();
     renderSidebar();
     renderNote();
+    renderViewBar();
     renderSections();
   }
 
@@ -273,6 +405,7 @@
   function runSearch(q) {
     const query = q.trim().toLowerCase();
     const resultsView = $('#resultsView');
+    document.body.classList.toggle('is-searching', !!query);
     if (!query) {
       resultsView.hidden = true;
       $('#sections').hidden = false;
@@ -306,18 +439,33 @@
     const limited = hits.slice(0, 300);
     $('#resultsTitle').textContent = `${t('resultsFor')} · ${hits.length}`;
     $('#resultsEmpty').hidden = hits.length > 0;
-    $('#resultsGrid').innerHTML = limited
-      .map((item) => {
-        if (item.offer) {
-          const fake = { ...item.offer };
-          return cardHtml(fake, {
-            crumb: `${titleOf(item.section)} / ${item.card.name}`,
-            reveal: false,
-          });
-        }
-        return cardHtml(item.card, { crumb: titleOf(item.section), reveal: false });
-      })
-      .join('');
+    const grid = $('#resultsGrid');
+    if (state.view === 'table') {
+      grid.className = 'results-table';
+      grid.innerHTML = `<div class="table-wrap"><table class="svc-table"><tbody>${limited.map(tableHitRow).join('')}</tbody></table></div>`;
+    } else if (state.view === 'list') {
+      grid.className = 'doc-list';
+      grid.innerHTML = limited.map(listHitHtml).join('');
+    } else {
+      grid.className = 'card-grid';
+      grid.innerHTML = limited
+        .map((item) => {
+          if (item.offer) {
+            return cardHtml({ ...item.offer }, {
+              crumb: `${titleOf(item.section)} / ${item.card.name}`,
+              reveal: false,
+            });
+          }
+          return cardHtml(item.card, { crumb: titleOf(item.section), reveal: false });
+        })
+        .join('');
+    }
+
+    // searching from deep in the page collapses the document; make sure the
+    // results head is actually in view instead of being scrolled past
+    if (resultsView.getBoundingClientRect().top < 64) {
+      resultsView.scrollIntoView({ block: 'start', behavior: 'instant' });
+    }
   }
 
   searchInputs.forEach((input) => {
@@ -331,12 +479,12 @@
   $('#clearSearch').addEventListener('click', () => {
     searchInputs.forEach((i) => (i.value = ''));
     runSearch('');
-    $('#heroSearch').focus();
+    (scrollY > 320 ? $('#searchInput') : $('#heroSearch')).focus();
   });
   addEventListener('keydown', (e) => {
     if (e.key === '/' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) {
       e.preventDefault();
-      $('#heroSearch').focus();
+      (scrollY > 320 ? $('#searchInput') : $('#heroSearch')).focus();
     }
     if (e.key === 'Escape' && document.activeElement.classList?.contains('search-input')) {
       searchInputs.forEach((i) => (i.value = ''));
@@ -408,16 +556,29 @@
     });
   });
 
+  $('#viewBar').addEventListener('click', (e) => {
+    const btn = e.target.closest('.view-btn');
+    if (!btn || btn.dataset.view === state.view) return;
+    state.view = btn.dataset.view;
+    localStorage.setItem('view', state.view);
+    renderViewBar();
+    renderSections();
+    const q = $('#searchInput').value.trim();
+    if (q) runSearch(q);
+  });
+
   const backTop = $('#backTop');
   addEventListener('scroll', () => {
     const y = scrollY;
     $('#topbar').classList.toggle('is-scrolled', y > 8);
+    $('#topbar').classList.toggle('search-visible', y > 320);
     backTop.classList.toggle('is-visible', y > 600);
   }, { passive: true });
   backTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
   /* ---------------- boot ---------------- */
   applyTheme();
+  $('#topbar').classList.toggle('search-visible', scrollY > 320);
   load()
     .then(() => {
       renderAll();
