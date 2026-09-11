@@ -1,1 +1,6 @@
 .idea
+.i18n-tmp/
+node_modules/
+__pycache__/
+*.log
+.DS_Store

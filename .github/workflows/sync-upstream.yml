@@ -1,0 +1,154 @@
+# 让中文译文与上游 free-for-dev 保持同步。
+#
+# 每周一（也可手动触发）执行：
+#   1. 抓取上游 README.md，逐字覆盖到 README.en.md（英文原文，永不翻译）
+#   2. 若英文原文有变化，重新生成 data/ 并推送到 sync/upstream-* 分支
+#   3. 自动开一个 PR，正文包含上游 diff 与「新增 / 移除条目清单」
+#
+# 这个 PR 就是待办清单：用条目 URL 在 README.md（中文）里搜索定位，
+# 让 AI 翻译新增条目、删除已移除条目，合并后站点自动更新。
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: '30 3 * * 1' # 周一 03:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+env:
+  UPSTREAM_URL: https://github.com/ripienaar/free-for-dev.git
+  UPSTREAM_RAW: https://raw.githubusercontent.com/ripienaar/free-for-dev/master/README.md
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Record upstream commit
+        id: upstream
+        run: |
+          url="$UPSTREAM_RAW"
+          sha=$(curl -sSI "$url" | grep -i '^etag:' | tr -d '\r' | sed -E 's/.*"([0-9a-f]{40}).*/\1/')
+          if [ -z "$sha" ] || [ "$sha" = "$url" ]; then sha=unknown; fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "上游提交：$sha"
+
+      - name: Update English source of truth
+        id: english
+        run: |
+          curl -fsSL "$UPSTREAM_RAW" -o /tmp/README.en.md
+          if cmp -s /tmp/README.en.md README.en.md; then
+            echo "README.en.md 与上游一致，无需同步。"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          cp /tmp/README.en.md README.en.md
+          git diff --stat -- README.en.md | tail -1 > /tmp/stat.txt
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          cat /tmp/stat.txt
+
+      - uses: actions/setup-node@v4
+        if: steps.english.outputs.changed == 'true'
+        with:
+          node-version: '20'
+
+      - name: Regenerate site data
+        if: steps.english.outputs.changed == 'true'
+        run: node scripts/build-data.js
+
+      - name: Push sync branch
+        if: steps.english.outputs.changed == 'true'
+        id: push
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          branch="sync/upstream-$(date -u +%Y%m%d)"
+          git checkout -b "$branch"
+          git add README.en.md data/
+          git commit -m "chore(i18n): 同步上游 free-for-dev $(date -u +%Y-%m-%d)"
+          git push -f origin "$branch"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Collect entry changes
+        if: steps.push.outputs.changed == 'true'
+        id: summary
+        run: |
+          git diff "origin/master" "${{ steps.push.outputs.branch }}" -- README.en.md > /tmp/upstream.diff
+          # 条目级锚点：本次同步新增 / 删除的服务行
+          git diff "origin/master" "${{ steps.push.outputs.branch }}" -- README.en.md \
+            | grep -E '^[+-][[:space:]]*\*[[:space:]]+\[[^]]+\]\(https?' \
+            | sed -E 's/^([+-])[[:space:]]*\*[[:space:]]*\[([^]]+)\]\((https?:[^)]+)\).*/\1 \2 — \3/' \
+            | sort -u > /tmp/entries.txt || true
+          echo "added=$(grep -c '^+' /tmp/entries.txt || true)" >> "$GITHUB_OUTPUT"
+          echo "removed=$(grep -c '^-' /tmp/entries.txt || true)" >> "$GITHUB_OUTPUT"
+          echo "sections=$(grep -cE '^[+-]## ' /tmp/upstream.diff || true)" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        if: steps.push.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.push.outputs.branch }}
+          ADDED: ${{ steps.summary.outputs.added }}
+          REMOVED: ${{ steps.summary.outputs.removed }}
+          SHA: ${{ steps.upstream.outputs.sha }}
+        run: |
+          entries=$(head -c 50000 /tmp/entries.txt || true)
+          diffblock=$(head -c 50000 /tmp/upstream.diff || true)
+          cat > /tmp/pr-body.md <<EOF
+          ## 上游同步（自动创建）
+
+          上游提交：\`${SHA:0:7}\` ｜ 新增条目约 **$ADDED** 条 ｜ 移除条目约 **$REMOVED** 条
+
+          本 PR 已把上游最新英文内容更新到 \`README.en.md\`，并重新生成了站点数据 \`data/\`。
+          **中文文件 \`README.md\` 尚未包含这些变更**，请在合并前处理。
+
+          ### 处理步骤
+
+          1. 展开下方「条目变更清单」，取条目 URL 在 \`README.md\` 中搜索定位（URL 是稳定锚点，分类与顺序和英文版一致）；
+          2. 翻译新增条目的描述并插入到与 \`README.en.md\` 相同的层级位置，保持缩进、列表符号、URL 逐字符不变；品牌名与数字配额不译；
+          3. 删除上游已移除的条目；
+          4. 运行 \`node scripts/build-data.js\`，确认输出 \`警告 0 条\`；
+          5. 合并本 PR，GitHub Pages 自动发布。
+
+          > 未翻译的条目在站点上会回退显示英文原文，因此即使跳过第 1–3 步直接合并也不会破坏页面。
+
+          <details>
+          <summary>条目变更清单（+ 新增 / - 移除）</summary>
+
+          \`\`\`text
+          $entries
+          \`\`\`
+
+          </details>
+
+          <details>
+          <summary>README.en.md 完整 diff</summary>
+
+          \`\`\`diff
+          $diffblock
+          \`\`\`
+
+          </details>
+          EOF
+          gh pr create --base master --head "$BRANCH" \
+            --title "chore(i18n): 同步上游 free-for-dev $(date -u +%Y-%m-%d)" \
+            --body-file /tmp/pr-body.md

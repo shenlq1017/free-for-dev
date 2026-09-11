@@ -1,0 +1,14 @@
+{
+  "name": "free-for-dev-i18n",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "中文优先的 free-for-dev 国际化版本：README.en.md 为上游英文原文，README.md 为中文译文，data/ 为按模块拆分的站点数据源。",
+  "scripts": {
+    "build:data": "node scripts/build-data.js",
+    "serve": "python -m http.server 8765 --bind 127.0.0.1"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}
