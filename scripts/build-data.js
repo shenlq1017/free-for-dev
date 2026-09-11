@@ -205,9 +205,11 @@ const enIntro = parsePreamble(read('README.en.md'));
 const zhIntro = parsePreamble(read('README.md'));
 const intro = enIntro.map((en, i) => ({ en, zh: zhIntro[i] ?? '' }));
 
+// The commit that last refreshed README.en.md — a real upstream sync marker,
+// stable across rebuilds so the generated JSON is byte-for-byte idempotent.
 let upstreamCommit = '';
 try {
-  upstreamCommit = execSync('git rev-parse --short HEAD', {
+  upstreamCommit = execSync('git log -1 --format=%h -- README.en.md', {
     encoding: 'utf8',
     cwd: fileURLToPath(ROOT),
   }).trim();
@@ -225,7 +227,6 @@ function countServices(mods) {
 }
 
 writeJson(new URL('data/index.json', ROOT), {
-  generatedAt: new Date().toISOString(),
   upstreamCommit,
   source: 'https://github.com/ripienaar/free-for-dev',
   stats: { sections: indexSections.length, services: countServices(moduleData) },
