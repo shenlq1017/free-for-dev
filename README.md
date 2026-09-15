@@ -241,7 +241,6 @@
   * [CarAPI.dev](https://carapi.dev) - 全面的汽车数据 API，提供 VIN 解码、被盗车辆检查、车辆估值、检测数据等。免费套餐在所有 9 个端点上每月包含 100 次请求。
   * [CatchDoms](https://catchdoms.com) - 聚合来自 16 个市场的过期和即将删除域名列表，附带 SEO 丰富信息（反向链接、Trust Flow、Wayback 历史）和质量评分。免费计划：10 个解锁列表、5 个收藏、3 个已保存搜索。注册可获得 7 天 Pro 试用，包含完整 REST API 和 MCP 服务器访问权限。
   * [Cloudmersive](https://cloudmersive.com/) - 实用工具 API 平台，可完全访问丰富的 API 库，包括文档转换、病毒扫描等，每月 600 次调用，仅限北美 AZ，最大文件大小 2.5MB。
-  * [Colaboratory](https://colab.research.google.com) - 免费的基于 Web 的 Python notebook 环境，配备 Nvidia Tesla K80 GPU。
   * [CometML](https://www.comet.com/site/) - 用于实验追踪、模型生产管理、模型注册表和完整数据血缘的 MLOps 平台，覆盖从训练到生产的整个工作流。个人和学术用途免费。
   * [Commerce Layer](https://commercelayer.io) - 可组合商务 API，可从任意前端创建、下单和管理订单。开发者计划允许每月免费 100 个订单和最多 1,000 个 SKU。
   * [Composio](https://composio.dev/) - 面向 AI 智能体和 LLM 的集成平台。跨智能体互联网集成 200 多个工具。
@@ -254,7 +253,6 @@
   * [CurrencyScoop](https://currencyscoop.com) - 面向金融科技应用的实时货币数据 API。免费计划包含每月 5,000 次调用。
   * [CustomJS](https://www.customjs.io) - 提供 HTML 转 PDF、PDF 转 PNG/文本以及 PDF 合并/提取 API。免费套餐每月 600 次调用。
   * [Data Fetcher](https://datafetcher.com) - 无需代码即可将 Airtable 连接到任意应用或 API。类似 Postman 的界面，用于在 Airtable 中运行 API 请求。预建了与数十种应用的集成。免费计划包含每月 100 次运行。
-  * [Data Miner](https://dataminer.io/) - 用于从网页提取数据为 CSV 或 Excel 的浏览器扩展（Google Chrome、MS Edge）。免费计划提供每月 500 页。
   * [Dataimporter.io](https://www.dataimporter.io) - 用于连接、清洗数据并将其导入 Salesforce 的工具。免费计划包含每月最多 20,000 条记录。
   * [Datalore](https://datalore.jetbrains.com) - Jetbrains 出品的 Python notebook。包含 10 GB 存储和每月 120 小时运行时。
   * [DB Designer](https://www.dbdesigner.net/) - 基于云的数据库模式设计和建模工具，免费入门计划包含 2 个数据库模型，每个模型十张表。
@@ -267,15 +265,12 @@
   * [Doppio](https://doppio.sh/) - 托管 API，使用顶级渲染技术生成并私密存储 PDF 和截图。免费计划允许每月 400 个 PDF 和截图。
   * [DocPenny](https://docpenny.com) - 基于模板、webhook 投递和积分定价的 HTML 转 PDF 文档生成。免费计划每月 50 个积分，无需信用卡。
   * [Doqlo](https://doqlo.com/) - 通过 Web 应用或公共 API 从 CSV 批量填充和邮件合并 PDF 表单。免费计划包含每月 100 个输出 PDF。
-  * [drawDB](https://drawdb.app/) - 免费开源的在线数据库图表编辑器，无需注册。
   * [DynamicDocs](https://advicement.io) - 通过基于 LaTeX 模板的 JSON 转 PDF API 生成 PDF 文档。免费计划允许每月 50 次 API 调用并可访问模板库。
   * [Earnings Feed](https://earningsfeed.com/api) - 实时 SEC 文件、内幕交易和机构持仓 API。免费套餐包含每分钟 15 次请求。
   * [Export SDK](https://exportsdk.com) - PDF 生成器 API，带拖放模板编辑器，提供 SDK 和无代码集成。免费计划有每月 250 页、用户数不限和三个模板。
-  * [ExtendsClass](https://extendsclass.com/rest-client-online.html) - 免费的基于 Web 的 HTTP 客户端，用于发送 HTTP 请求。
   * [Financial Data](https://financialdata.net/) - 股票市场和金融数据 API。免费计划允许每天 300 次请求。
   * [finlight](https://finlight.me) - 实时财经新闻 API，带实体解析（股票代码、ISIN）和情感标签，可通过 REST、WebSocket、webhook 和 MCP 服务器使用。免费套餐：REST 和 MCP 均为每月 5,000 次请求、文章延迟 12 小时，无需银行卡。
   * [Firecrawl](https://www.firecrawl.dev/) - 抓取网站并将其转换为干净的、可供 LLM 使用的 markdown 或结构化数据的 API，可处理 JavaScript 渲染、代理和速率限制。免费计划包含每月 1,000 个额度，无需信用卡。
-  * [FormatJSONOnline.com](https://formatjsononline.com) - 免费的浏览器端工具，可即时格式化、验证、比较和压缩 JSON 数据。
   * [FraudLabs Pro](https://www.fraudlabspro.com) - 筛查订单交易中的信用卡支付欺诈。此 REST API 将根据订单的输入参数检测所有可能的欺诈特征。免费 Micro 计划每月 500 笔交易。
   * [FreeIPAPI](https://freeipapi.com) - 免费、快速、可靠的 IP 地理位置 API，面向商业和非商业用户，以 JSON 提供
   * [Geolocated.io](https://geolocated.io) - 部署多洲服务器的 IP 地理位置 API，免费计划提供每天 2,000 次请求。
@@ -305,11 +300,7 @@
   * [JSON IP](https://getjsonip.com) - 返回请求来源客户端的公共 IP 地址。免费套餐无需注册。借助 CORS，可以直接在浏览器中使用客户端 JS 请求数据。适用于监控客户端和服务器 IP 变化的服务。请求次数不限。
   * [JSON to Table](https://jsontotable.org) - 将 JSON 转换为交互式表格，便于在线快速查看、编辑和分享。
   * [JSON2Video](https://json2video.com) - 视频编辑 API，以编程方式或无代码方式自动化视频营销和社交媒体视频制作。
-  * [JSONGrid](https://jsongrid.com) - 免费工具，可将复杂 JSON 数据可视化、编辑、过滤为美观的表格网格。通过链接保存和分享 JSON 数据。
   * [JSONing](https://jsoning.com/api/) - 从 JSON 对象创建模拟 REST API，并可自定义 HTTP 状态码、标头和响应体。
-  * [JSONSwiss](https://www.jsonswiss.com/) - JSONSwiss 是强大的在线 JSON 查看器、编辑器和验证器。可借助 AI 修复、树形视图、表格视图、12 种以上编程语言的代码生成来格式化、可视化、搜索和操作 JSON 数据，并支持将 json 转换为 csv、xml、yaml、properties 等。
-  * [KillBait API](https://killbait.com/api/doc) - KillBait API 允许用户提交 URL 进行内容评估，检测潜在的标题党并对文章分类。该 API 为中等发布频率设计，限制为每小时 1 次提交、每天 10 次。媒体合作伙伴可申请更高限额。
-  * [Kreya](https://kreya.app) - 免费的 gRPC GUI 客户端，用于调用和测试 gRPC API。可通过服务器反射导入 gRPC API。
   * [Labelixa](https://labelixa.com) - Zebra ZPL 标签渲染和验证 API 及浏览器查看器。免费套餐包含匿名渲染额度和无水印条形码生成，无需银行卡。
   * [LayerCall](https://www.layercall.com) - 一次调用即可完成 IP、电子邮件、电话、域名或设备的欺诈和信任评分，并为 AI 智能体提供授权和 Web Bot Auth 验证。每月免费 1,000 次查询，无需银行卡。
   * [LoginLlama](https://loginllama.app) - 登录安全 API，用于检测欺诈性和可疑登录并通知你的客户。每月 1,000 次登录免费。
@@ -324,7 +315,6 @@
   * [Multi-Exit IP Address Checker](https://ip.alstra.ca/) -  免费且简单的工具，可跨多个节点检查你的出口 IP 地址，了解你的 IP 在全球不同区域和服务中的呈现方式。适用于测试 Control D 等基于规则的 DNS 分流工具。
   * [NASdisks Drive Data API](https://www.nasdisks.com/data/) - 免费、无需密钥且启用 CORS 的 API，提供 NAS HDD/SSD 规格、各型号的 CMR/SMR 分类以及源自 Backblaze Drive Stats 的年化故障率。返回 JSON 或 CSV，CC BY 4.0，无需注册。
   * [News API](https://newsapi.org) - 用代码搜索网络新闻并获取 JSON 结果。开发者每天免费获得 100 次查询。文章有 24 小时延迟。
-  * [numlookupapi.com](https://numlookupapi.com) - 免费电话号码验证 API - 每月 100 次免费请求。
   * [OCR.Space](https://ocr.space/) - OCR API 可解析图片和 PDF 文件，以 JSON 格式返回文本结果。每月 25,000 次请求免费，文件大小限制 1MB。
   * [OpenAPI3 Designer](https://openapidesigner.com/) - 免费以可视化方式创建 OpenAPI 3 定义。
   * [Parseur](https://parseur.com) - 每月 20 个免费页面：从 PDF、电子邮件中提取数据。AI 驱动。拥有完整 API 访问权限。
@@ -341,15 +331,10 @@
   * [Reducto](https://reducto.ai) - 将任意非结构化文档（PDF、XLSX、JPG、PPTX 等）转化为结构化 JSON 数据。解析、提取数据并编辑 PDF 表单。免费套餐含 15k 免费额度，按量付费。
   * [Rendi](https://rendi.dev) - FFmpeg API - 面向 FFmpeg 的 REST API，无需处理基础设施即可在线运行 FFmpeg。免费套餐有每月处理额度，可使用 4 vCPU。
   * [RequestBin.com](https://requestbin.com) - 创建一个免费端点，你可以向其发送 HTTP 请求。发送到该端点的任何 HTTP 请求都会连同相关负载和标头一起被记录，以便你观察来自 webhook 和其他服务的请求。
-  * [ROBOHASH](https://robohash.org/) - 根据任意文本生成独特酷炫图片的 Web 服务。
-  * [Scraper's Proxy](https://scrapersproxy.com) - 用于抓取的简单 HTTP 代理 API。匿名抓取，无需担心限制、封锁或验证码。每月前 100 次成功抓取免费，包含 JavaScript 渲染（联系支持可获得更多）。
-  * [ScrapingAnt](https://scrapingant.com/) - Headless Chrome 抓取 API 和免费的已审核代理服务。支持 JavaScript 渲染、优质轮换代理、规避 CAPTCHA。免费 10,000 API 额度。
-  * [SerpApi](https://serpapi.com/) - 实时搜索引擎抓取 API。返回 Google、YouTube、Bing、Baidu、Walmart 等众多搜索引擎的结构化 JSON 结果。免费计划包含每月 100 次成功 API 调用。
   * [Simplescraper](https://simplescraper.io) - 每次操作后触发你的 webhook。免费计划包含 100 个云端抓取额度。
   * [Geekflare API](https://geekflare.com/api/) - Geekflare API 允许你将网站抓取为 Markdown、截图、执行 TLS 扫描和 DNS 查询、测试加载时间等。免费计划提供每月 500 API 额度（例如 500 次 DNS 查询、250 次网页抓取或 100 次截图）。参见[额度映射](https://docs.geekflare.com/api/api-credit-mapping)。
   * [SmartParse](https://smartparse.io) - SmartParse 是数据迁移和 CSV 转 API 平台，提供节省时间和成本的开发者工具。免费套餐包含每月 300 个处理单元、浏览器上传、数据隔离、断路器和任务告警。
   * [Sofodata](https://www.sofodata.com/) - 从 CSV 文件创建安全的 RESTful API。上传 CSV 文件即可通过其 API 即时访问数据，从而加快应用开发。免费计划包含 2 个 API 和每月 2,500 次 API 调用。无需信用卡。
-  * [Sqlable](https://sqlable.com/) - 免费在线 SQL 工具集合，包括 SQL 格式化程序和验证器、SQL 正则表达式测试器、模拟数据生成器和交互式数据库演练场。
   * [Svix](https://www.svix.com/) - Webhook 即服务。每月最多免费发送 50,000 条消息。
   * [Tavily AI](https://tavily.com/) - 用于在线搜索、快速洞察和综合研究的 API，并具备整理研究结果的能力。免费套餐每月 1000 次请求，无需信用卡。
   * [TemplateFox](https://pdftemplateapi.com) - PDF 生成 API，带可视化模板编辑器、动态数据合并和 7 种语言的 SDK。免费计划包含每月 60 个 PDF 和 3 个模板。
@@ -369,10 +354,7 @@
   * [XFlux](https://www.xfluxapi.com) - X/Twitter 只读 REST API（个人资料、搜索、时间线）以及账户监控。免费套餐：每月 1,000 次 API 调用、1 个监控器、即时 API 密钥。付费计划（每月 19 美元起）支持 HTTP webhook。
   * [wolfram.com](https://wolfram.com/language/) - 云端内置的基于知识的算法。
   * [wrapapi.com](https://wrapapi.com/) - 将任意网站转化为参数化 API。每月 30k 次 API 调用。
-  * [Zenscrape](https://zenscrape.com/web-scraping-api) - 网页抓取 API，配备无头浏览器、住宅 IP 和简单明了的定价。每月 1,000 次免费 API 调用，并为学生和非营利组织提供额外额度。
   * [Zipcodebase](https://zipcodebase.com) - 免费邮政编码 API，可访问全球邮政编码数据。每月 5,000 次免费请求。
-  * [Zip-Codes](https://www.zip-codes.com/api/) - 面向美国和加拿大邮政编码的 REST API，提供地址验证、半径搜索和人口普查统计数据。每天 2,500 次免费请求。
-  * [Zipcodestack](https://zipcodestack.com) - 免费邮政编码 API 和邮政编码验证。每月 10,000 次免费请求。
   * [Zuplo](https://zuplo.com/) - 免费的 API 管理平台，用于在边缘设计、构建和部署 API。几分钟内即可为任意 API 添加 API 密钥认证、速率限制、开发者文档和变现功能。原生支持 OpenAPI，可使用 Web 标准 API 和 TypeScript 完全编程。免费计划提供最多 10 个项目、无限量生产边缘环境、每月 100 万次请求和 10GB 出站流量。
   * [Metashot](https://metashot.io) — Open Graph（OG）社交预览图片生成 API。通过 URL 参数为 Twitter、LinkedIn 和 Facebook 生成动态 1200×630 图片，在 Cloudflare Workers 上进行边缘缓存。免费套餐：每月 1,000 次渲染。付费计划每月 12 美元起。
 
@@ -1581,9 +1563,7 @@
 
   * [Adapty.io](https://adapty.io/) - 提供开源 SDK 的一站式解决方案，用于将移动应用内订阅集成到 iOS、Android、React Native、Flutter、Unity 或 Web 应用。月收入不超过 $10k 免费。
   * [AllRatesToday](https://allratestoday.com) - 提供 150+ 种货币的实时中间市场汇率，附带官方 JavaScript、Python 和 PHP SDK。免费套餐包含每月 300 次 HTTPS 请求。
-  * [Codex](https://www.codex.io) - 实时加密货币和预测市场数据 API，提供定价、图表、交易、钱包余额和趋势数据。免费套餐每月提供 10,000 次免费请求，需要信用卡或加密货币认证。
   * [Churnkey](https://churnkey.co) - 面向订阅业务的取消流程（开源）、流失指标和收入分析。永久免费。
-  * [CoinMarketCap](https://coinmarketcap.com/api/) - 提供加密货币市场数据，包括最新的加密货币和法币汇率。免费套餐每月提供 10K 调用额度。
   * [Currencyapi](https://currencyapi.com) - 免费的货币转换和汇率数据 API。每月免费 300 次请求，私人用途每分钟 10 次请求。
   * [CurrencyApi](https://currencyapi.net/) - 以 JSON 和 XML 提供法币和加密货币的实时汇率。免费套餐每月提供 1,250 次 API 请求。
   * [CurrencyFreaks](https://currencyfreaks.com/) - 提供当前和历史货币汇率。提供免费 DEVELOPER 套餐，每月 1000 次请求。
