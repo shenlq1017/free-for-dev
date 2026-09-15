@@ -1,5 +1,6 @@
 .idea
 .i18n-tmp/
+.workbuddy/
 node_modules/
 __pycache__/
 *.log
