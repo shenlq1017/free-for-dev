@@ -347,6 +347,7 @@
   * [vatcheckapi.com](https://vatcheckapi.com) - 简单免费的 VAT 编号验证 API。每月 150 次免费验证。
   * [vatnode](https://vatnode.dev) - 欧盟 VAT 编号验证 REST API，以 VIES 和国家税务登记库为后备，返回官方 VIES 查询编号用于审计记录。免费套餐每月 100 次验证，无需信用卡。
   * [WeatherXu](https://weatherxu.com/) - 通过我们的 API 提供全球天气数据，包括当前状况、每小时和每日预报以及天气告警。集成 AI 模型和 ML 系统来分析和组合多个天气模型，以提供更高的预报准确率。免费套餐包含每月 10,000 次 API 调用。
+  * [Webhooker](https://webhooker.eu/) - 托管在德国的 Webhook 网关。支持签名验证、重试、死信队列和消息重放。免费计划：每月 10,000 个事件。
   * [WebScraping.AI](https://webscraping.ai) - 简单的网页抓取 API，内置解析、Chrome 渲染和代理。每月 2,000 次免费 API 调用。
   * [Weights & Biases](https://wandb.ai) - 开发者优先的 MLOps 平台。通过实验追踪、数据集版本控制和模型管理更快构建更好的模型。免费套餐仅限个人项目，包含 100 GB 存储。
   * [What Is My IP](https://whatismyip.help) - 一项免费服务，通过 API 检查你的公共 IPv4 和 IPv6 地址及相关请求数据，提供不同输出格式，适用于自动化、脚本和网络故障排查。
@@ -357,6 +358,7 @@
   * [Zipcodebase](https://zipcodebase.com) - 免费邮政编码 API，可访问全球邮政编码数据。每月 5,000 次免费请求。
   * [Zuplo](https://zuplo.com/) - 免费的 API 管理平台，用于在边缘设计、构建和部署 API。几分钟内即可为任意 API 添加 API 密钥认证、速率限制、开发者文档和变现功能。原生支持 OpenAPI，可使用 Web 标准 API 和 TypeScript 完全编程。免费计划提供最多 10 个项目、无限量生产边缘环境、每月 100 万次请求和 10GB 出站流量。
   * [Metashot](https://metashot.io) — Open Graph（OG）社交预览图片生成 API。通过 URL 参数为 Twitter、LinkedIn 和 Facebook 生成动态 1200×630 图片，在 Cloudflare Workers 上进行边缘缓存。免费套餐：每月 1,000 次渲染。付费计划每月 12 美元起。
+  * [Tinyfish](https://www.tinyfish.ai) - 免费的网页搜索与抓取 API，设有速率限制。
 
 **[⬆️ 返回顶部](#目录)**
 
@@ -629,6 +631,7 @@
   * [TestTLS.com](https://testtls.com) - 测试 SSL/TLS 服务的安全服务器配置、证书、证书链等。不限于 HTTPS。
   * [Virgil Security](https://virgilsecurity.com/) - 用于在你的数字解决方案中实现端到端加密、数据库保护、IoT 安全等的工具和服务。最多 250 位用户的应用免费。
   * [semgrep](https://semgrep.dev) - 通过 SAST 和 SCA 扫描代码中的安全问题和有漏洞的依赖。免费套餐含最多 10 名贡献者和 10 个私有仓库（公共仓库不限）。
+  * [SnapEnv](https://snapenv.io/) - 面向开发团队的安全环境变量管理工具。静态数据采用 AES-256-GCM 加密，提供 CLI、Kubernetes operator 和审计日志。免费计划永久包含 3 个项目、3 名成员，每个项目 3 个环境。
 
 **[⬆️ 返回顶部](#目录)**
 
@@ -1296,6 +1299,7 @@
   * [Lucidchart](https://www.lucidchart.com/) - 具备协作功能的在线图表工具。免费套餐含 3 个可编辑文档、100 个专业模板和基础协作功能。
   * [MeisterTask](https://www.meistertask.com/) - 面向团队的在线任务管理。免费支持最多 3 个项目和不限数量的项目成员。
   * [MeuScrum](https://www.meuscrum.com/en) - 免费的在线 scrum 工具，带看板。
+  * [myspec.dev](https://myspec.dev/) - 规格驱动开发（SDD）架构工具，通过访谈开发者生成结构化的 4 文件规格包，并集成 MCP 服务器。免费套餐支持 20 个项目和 100 个规格文件。
   * [nTask](https://www.ntaskmanager.com/) - 项目管理软件，让团队能够协作、规划、分析和管理日常任务。基础套餐永久免费，含 100 MB 存储和 5 名用户/团队。工作区、会议、任务分配、工时表和议题追踪数量不限。
   * [Plane](https://plane.so/) - Plane 是一款简单、可扩展的开源项目与产品管理工具。免费支持不限成员数，文件上传大小最高 5MB，1,000 个议题。
   * [planitpoker.com](https://www.planitpoker.com/) - 免费的在线计划扑克（估算工具）。
