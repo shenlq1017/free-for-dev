@@ -262,6 +262,7 @@ This list results from Pull Requests, reviews, ideas, and work done by 1600+ peo
   * [Doqlo](https://doqlo.com/) - Bulk fill and mail merge PDF forms from CSV using the web app or Public API. The free plan includes 100 output PDFs/month.
   * [DynamicDocs](https://advicement.io) - Generate PDF documents with JSON to PDF API based on LaTeX templates. The free plan allows 50 API calls per month and access to a library of templates.
   * [Earnings Feed](https://earningsfeed.com/api) - Real-time SEC filings, insider trades, and institutional holdings API. Free tier includes 15 requests per minute.
+  * [Estuary](https://estuary.dev/) - Real-time data integration platform for CDC, streaming, and batch data integration with 200+ managed connectors. Free plan includes 10 GB/month of data movement and up to 2 connector instances, with no time limit and no credit card required.
   * [Export SDK](https://exportsdk.com) - PDF generator API with drag-and-drop template editor that provides an SDK and no-code integrations. The free plan has 250 monthly pages, unlimited users, and three templates.
   * [Financial Data](https://financialdata.net/) - Stock market and financial data API. Free plan allows 300 requests per day.
   * [finlight](https://finlight.me) - Real-time financial news API with entity resolution (tickers, ISIN) and sentiment tagging, available over REST, WebSocket, webhooks and an MCP server. Free tier: 5,000 requests/month on both REST and MCP, 12-hour delayed articles, no card required.
@@ -499,6 +500,7 @@ This list results from Pull Requests, reviews, ideas, and work done by 1600+ peo
   * [gtmetrix.com](https://gtmetrix.com/) - Reports and thorough recommendations to optimize websites
   * [holistic.dev](https://holistic.dev/) - The #1 static code analyzer for Postgresql optimization. Performance, security, and architect database issues automatic detection service
   * [houndci.com](https://houndci.com/) - Comments on GitHub commits about code quality, free for Open Source
+  * [prquorum.com](https://prquorum.com) - ai code review github app, free 50 reviews/month on 2 repos
   * [reviewable.io](https://reviewable.io/) - Code review for GitHub repositories, free for public or personal repos.
   * [scan.coverity.com](https://scan.coverity.com/) - Static code analysis for Java, C/C++, C# and JavaScript, free for Open Source
   * [scrutinizer-ci.com](https://scrutinizer-ci.com/) - Continuous inspection platform, free for Open Source
@@ -846,6 +848,7 @@ This list results from Pull Requests, reviews, ideas, and work done by 1600+ peo
   * [CloudCertPrep](https://cloudcertprep.io) - Free, open-source AWS certification practice exams with 1,050+ questions for CLF-C02. Features timed mock exams, domain practice, spaced repetition, and progress tracking.
   * [CodeTrain](https://codetrain.ai) - AI coding tutor that teaches you on your own codebase and never writes the code for you. Free tier: 10 in-browser lessons/month, Python/JS run client-side, no card required.
   * [DeepLearning.AI Short Courses](https://www.deeplearning.ai/short-courses/) - Free short courses from industry-leading experts to get hands-on experience with the latest generative AI tools and techniques in an hour or less.
+  * [DevOpsLesson](https://devopslesson.com/) - Free DevOps tutorials, cheatsheets, troubleshooting guides, roadmaps, interview preparation and DevOps tools: Dockerfile Linter, K8S YAML file generator, Regex Tester.
   * [DevNet Academy](https://devnet-academy.com/) - Free, self-paced training for the Cisco DevNet Expert / CCIE Automation certification. Covers Python Click and Flask-RESTx.
   * [Django-tutorial.dev](https://django-tutorial.dev) - Free online guides for learning Django as their first framework & gives free dofollow backlink to articles written by users.
   * [edX](https://www.edx.org/) - Offers access to over 4,000 free online courses from 250 leading institutions, including Harvard and MIT, specializing in computer science, engineering, and data science.
@@ -1073,6 +1076,7 @@ This list results from Pull Requests, reviews, ideas, and work done by 1600+ peo
   * [Cohesivity](https://cohesivity.ai) - Headless backend and services, purpose built for AI agents. Includes hosting, databases, storage, LLMs, and third-party APIs. Agentic signup. Free tier includes 10 projects, 100K edge requests, 10 GB object storage, 100 emails, and 5 USD/month in credits for AI and search.
   * [Daestro](https://daestro.com) - Run compute jobs across Cloud Providers & On-Prem. The free tier includes up to 10 concurrent job runs, 2 compute spawns, self-hosted compute, 1 cloud provider, 1 container registry and 1 cron job.
   * [Deno Deploy](https://deno.com/deploy) - Distributed system that runs JavaScript, TypeScript, and WebAssembly at the edge worldwide. The free tier includes 100,000 requests per day and 100 GiB data transfers per month.
+  * [Deplexo](https://deplexo.com/) - Developer-focused PaaS for deploying and hosting applications with Git-based deployments, custom domains, automatic HTTPS, and Dockerfile support. Run Node.js, Python, Go, Java, Rust, PHP, static sites, and more. The free tier includes 1 app with 0.25 vCPU, 128 MB RAM, 250 MB disk, and 100 GB bandwidth.
   * [domcloud.co](https://domcloud.co) - Linux hosting service that provides CI/CD with GitHub, SSH, and MariaDB/Postgres database. The free version has 1 GB storage and 1 GB network/month limit and is limited to a free domain.
   * [encore.dev](https://encore.dev/) - Backend framework using static analysis to provide automatic infrastructure, boilerplate-free code, and more. Includes free cloud hosting for hobby projects.
   * [faable.com](https://faable.com/) - Deploy apps with framework auto-detection for Python and Node.js. The free tier includes one 0.5 CPU / 1 GB RAM instance per project, 10 GB bandwidth, 10 successful deploys per day, automatic SSL and a built-in WAF, plus OAuth 2.0 / OIDC authentication. Apps sleep after 2 hours without traffic. European servers.
@@ -1511,6 +1515,7 @@ Update Time, five active automations, webhooks.
   * [Census](https://www.getcensus.com/) - Reverse ETL & Operational Analytics Platform. Sync 10 fields from your data warehouse to 60+ SaaS like Salesforce, Zendesk, or Amplitude.
   * [Clicky](https://clicky.com) - Website Analytics Platform. Free Plan for one website with 3000 views analytics.
   * [counter.dev](https://counter.dev) - Web analytics made simple and therefore privacy friendly. Free or pay what you want by donation.
+  * [DevDome](https://devdome.com) - Cookieless web analytics for WordPress that counts human visitors separately from bots and AI crawlers. Free plan: unlimited sites, 50,000 human pageviews per month, 90 days of data retention.
   * [DocBeacon](https://docbeacon.io) - Secure document sharing with document tracking and engagement Analytics. Free plan supports up to 20 PDF documents (10 MB max), 10 contacts, and 2 shares per document with basic analytics for views downloads, time and engagement.
   * [Dwh.dev](https://dwh.dev) - Data Cloud Observability Solution (Snowflake). Free for personal use.
   * [Expensify](https://www.expensify.com/) - Expense reporting, free personal reporting approval workflow
